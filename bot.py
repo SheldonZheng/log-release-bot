@@ -1,4 +1,5 @@
 import requests
+import json
 
 token = ''
 
@@ -8,12 +9,21 @@ def getToken() :
         token = f.read()
         #print(token)
 
-def getUpdates() :
+def getUpdates(offset) :
     url = 'https://api.telegram.org/bot%s/getUpdates' % token
-    r = requests.get(url)
+    param = {
+        'offset' : offset
+    }
+    r = requests.post(url,param)
     return r.text
 
 if __name__ == '__main__' :
     getToken()
-    updates = getUpdates()
-    print(updates)
+
+    #updater = Updater(token=token)
+    #dispatcher = updater.dispatcher
+
+    #updatesStr = getUpdates(351162951)
+    #updates = json.loads(updatesStr)
+
+    #print(updates)
